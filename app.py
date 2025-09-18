@@ -39,7 +39,7 @@ def show_profile_form():
     st.markdown("---")
     
     st.markdown("""
-    This app will guide you through a reflective exercise about your relationship dynamics. 
+    This discovery exercise will guide you through a reflective exercise about your relationship dynamics. 
     You'll explore a topic through 5 thoughtful questions and receive a summary of your insights.
     
     **Let's start by getting to know you a bit:**
