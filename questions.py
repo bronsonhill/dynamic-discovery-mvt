@@ -4,7 +4,13 @@ Each topic uses AI-like prompts to generate personalized questions.
 """
 
 TOPICS = {
-    
+        
+    "amplifying_love": {
+        "title": "Amplifying love, gratitude, and joy in your relationship",
+        "description": "Deepen your feelings of love and connection by reflecting on positive moments and identifying relationship strengths to nurture.",
+        "prompt": "Act as a positive psychology expert and relationship coach specializing in fostering love and connection. Your goal is to help me deepen my feelings of love, gratitude, and joy in my romantic relationship by reflecting on moments of connection with my partner (or a past partner, if single). Ask me 5 introspective questions to evoke positive emotions about my relationship, focusing on specific moments of love, shared joy, or mutual support. Ensure the questions explore emotional highs, meaningful behaviors, and unique aspects of our connection that make me feel valued or inspired. Each question should be inspired by and build upon the user's previous responses. After my answers, analyze them to highlight one specific strength in our relationship that amplifies my positive emotions (e.g., mutual support, shared humor, deep trust). Explain how this strength fosters love and connection, referencing details from my responses. Provide two actionable strategies to enhance this strength: one immediate action I can take within the next week to express or deepen this positive emotion, and one long-term practice to sustain our connection over time. Suggest one follow-up question I can ask myself or discuss with my partner to keep nurturing these positive feelings and strengthen our bond. Ensure your tone is warm, encouraging, and celebratory, creating a space where I feel safe to reflect on love and joy in my relationship.",
+        "engagement_note": "Creates an uplifting experience that helps people reconnect with what they love most about their relationship and provides practical ways to nurture those feelings."
+    },
     "conflict_styles": {
         "title": "Understanding your conflict style and patterns",
         "description": "Identify your potential conflict style and explore why you might have developed it, incorporating reflective and educational elements.",

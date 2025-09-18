@@ -90,13 +90,13 @@ def generate_question(topic_key, question_number, previous_responses=None, user_
         
         # Generate the question
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5",
             messages=messages,
-            max_tokens=200,
-            temperature=0.7,
-            presence_penalty=0.1,
-            frequency_penalty=0.1
+            max_completion_tokens=300,
+            reasoning_effort="minimal"
         )
+
+        print(response)
         
         question = response.choices[0].message.content.strip()
         
@@ -165,10 +165,10 @@ def generate_insight(topic_key, responses, user_profile=None):
         
         # Generate the insights
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5",
             messages=messages,
-            max_tokens=300,
-            temperature=0.7
+            max_completion_tokens=1000,
+            reasoning_effort="low"
         )
         
         return response.choices[0].message.content.strip()
@@ -229,10 +229,10 @@ def generate_summary(topic_key, responses, user_profile=None):
         
         # Generate the summary
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5",
             messages=messages,
-            max_tokens=400,
-            temperature=0.6
+            max_completion_tokens=1000,
+            reasoning_effort="low"
         )
         
         return response.choices[0].message.content.strip()
