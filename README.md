@@ -1,153 +1,216 @@
-Here’s a detailed README draft for your Streamlit site project based on your specifications:
+# Relationship Reflection App 💕
 
----
+A Streamlit application that guides users through reflective exercises about their relationship dynamics. Users select a topic, answer 5 thoughtful questions, and receive personalized insights. All responses are securely stored in Firebase Firestore.
 
-# Relationship Reflection App – Streamlit MVP
+## ✨ Features
 
-This is a Streamlit application that allows users to explore their relationship dynamics through guided exercises. Users select a topic, answer 5 reflective questions one at a time, and receive a summary at the end. All user responses are stored in **Firestore**, and users can rate how informative the exercise was.
+### 🧑‍💼 User Profile Collection
+- Name, age, gender, and relationship status
+- Secure storage for personalized insights
 
----
+### 🎯 Topic Selection
+Choose from 5 carefully crafted reflection topics:
+- **What really matters in conflict** - Explore underlying values in disagreements
+- **How do you and your partner fight fair — or not?** - Examine conflict resolution patterns
+- **What makes you feel most connected?** - Discover intimacy and bonding moments
+- **What do you wish your partner knew without having to say it?** - Uncover unexpressed needs
+- **How do stress and outside pressures show up in your relationship?** - Analyze external impacts
 
-## Features
+### 📝 Guided Question Flow
+- 5 sequential, thoughtful questions per topic
+- Progress tracking and navigation
+- Previous response review for context
 
-1. **User Profile Input**
+### 📊 Summary & Insights
+- Automatic summary generation
+- Pattern recognition from responses
+- Complete response archive
 
-   * Users enter:
+### ⭐ Feedback System
+- 1-5 star rating system
+- Optional written feedback
+- Topic statistics and community insights
 
-     * Name
-     * Age
-     * Gender
-     * Relationship Status
-   * This information is stored alongside their responses for personalized insights.
+## 🛠 Tech Stack
 
-2. **Topic Selection**
-   Users can select from various reflection topics, including:
+- **Frontend:** Streamlit
+- **Backend/Database:** Firebase Firestore
+- **AI:** OpenAI GPT-3.5-turbo for dynamic question generation
+- **Language:** Python 3.8+
+- **Deployment:** Streamlit Cloud ready
 
-   * “What really matters in conflict”
-   * “How do you and your partner fight fair — or not?”
-   * “What makes you feel most connected?”
-   * “What do you wish your partner knew without having to say it?”
-   * “How do stress and outside pressures show up in your relationship?”
+## 🚀 Quick Start
 
-3. **Guided 5-Question Flow**
+### Prerequisites
+- Python 3.8 or higher
+- Firebase project with Firestore enabled
+- OpenAI API key
 
-   * Each topic has 5 sequential questions.
-   * Users answer one at a time.
-   * Responses are temporarily displayed for reflection.
+### Installation
 
-4. **Summary and Insights**
-
-   * After completing all 5 questions, the app generates a concise summary of the user’s responses.
-   * Users are encouraged to reflect on patterns and insights revealed by the exercise.
-
-5. **Feedback / Rating**
-
-   * Users can rate how informative the exercise was on a scale (e.g., 1–5 stars).
-   * Ratings and comments are stored in Firestore.
-
----
-
-## Tech Stack
-
-* **Frontend:** Streamlit
-* **Backend / Database:** Firebase Firestore
-* **Language:** Python
-* **Data Storage:** Firestore collections for user profiles, responses, topics, and ratings
-
----
-
-## Installation
-
-1. Clone the repository:
-
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/relationship-reflection-app.git
-   cd relationship-reflection-app
+   git clone <your-repo-url>
+   cd dynamic-discovery-mvt
    ```
 
-2. Install required packages:
-
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Set up Firebase Firestore:
+3. **Set up Firebase & OpenAI:**
+   
+   **Option A: Local Development**
+   - Download your Firebase service account key
+   - Save it as `firebase_key.json` in the project root
+   - Get your OpenAI API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+   
+   **Option B: Streamlit Cloud Deployment**
+   - Copy `.streamlit/secrets.toml.example` to `.streamlit/secrets.toml`
+   - Fill in your Firebase credentials
+   - Add your OpenAI API key
 
-   * Create a Firebase project.
-   * Enable Firestore in the console.
-   * Generate a service account key JSON file.
-   * Save it as `firebase_key.json` in the project root.
-
-4. Configure Firestore in the app (example `config.py`):
-
-   ```python
-   import firebase_admin
-   from firebase_admin import credentials, firestore
-
-   cred = credentials.Certificate("firebase_key.json")
-   firebase_admin.initialize_app(cred)
-   db = firestore.client()
+4. **Run the application:**
+   ```bash
+   streamlit run app.py
    ```
 
----
+## 📁 Project Structure
 
-## Running the App
+```
+dynamic-discovery-mvt/
+├── app.py                          # Main Streamlit application
+├── config.py                       # Firebase configuration
+├── firebase_utils.py               # Database operations
+├── openai_utils.py                 # AI question generation
+├── questions.py                     # Topic prompts and data
+├── requirements.txt                 # Python dependencies
+├── .streamlit/
+│   └── secrets.toml.example        # Example secrets configuration
+├── .gitignore                      # Git ignore rules
+└── README.md                       # This file
+```
 
+## 🔥 Firebase Setup
+
+### 1. Create Firebase Project
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project
+3. Enable Firestore Database
+
+### 2. Generate Service Account Key
+1. Go to Project Settings > Service Accounts
+2. Click "Generate new private key"
+3. Save the JSON file as `firebase_key.json`
+
+### 3. Firestore Collections
+
+The app creates these collections automatically:
+
+**`users`**
+```json
+{
+  "user_id": "uuid",
+  "name": "string",
+  "age": "number",
+  "gender": "string",
+  "relationship_status": "string",
+  "created_at": "timestamp"
+}
+```
+
+**`responses`**
+```json
+{
+  "response_id": "uuid",
+  "user_id": "string",
+  "topic": "string",
+  "qa_pairs": [
+    {
+      "question_number": 1,
+      "question": "AI-generated question text",
+      "response": "User's response"
+    }
+  ],
+  "questions": ["array of AI-generated questions"],
+  "responses": ["array of user answers"],
+  "summary": "AI-generated summary",
+  "completed_at": "timestamp"
+}
+```
+
+**`ratings`**
+```json
+{
+  "rating_id": "uuid",
+  "user_id": "string",
+  "topic": "string",
+  "ratings": {
+    "informative": "number (1-5)",
+    "engaging": "number (1-5)",
+    "repeat": "number (1-5)"
+  },
+  "informative_rating": "number (1-5)",
+  "engaging_rating": "number (1-5)",
+  "repeat_rating": "number (1-5)",
+  "overall_rating": "number (1-5, average)",
+  "feedback": "string (optional)",
+  "created_at": "timestamp"
+}
+```
+
+## 🌐 Deployment
+
+### Streamlit Cloud
+1. Push your code to GitHub
+2. Connect your repo to [Streamlit Cloud](https://streamlit.io/cloud)
+3. Add your Firebase credentials to Streamlit secrets
+4. Deploy!
+
+### Local Development
 ```bash
 streamlit run app.py
 ```
 
-* Navigate through the onboarding steps (enter profile info).
-* Select a reflection topic.
-* Complete the 5-question flow.
-* Review your summary and provide a rating for the exercise.
+## 🎨 User Experience Flow
+
+1. **Welcome & Profile** - Users enter basic demographic information
+2. **Topic Selection** - Browse and select from 5 reflection topics
+3. **Question Flow** - Answer 5 questions with navigation and progress tracking
+4. **Summary** - Review insights and complete responses
+5. **Feedback** - Rate the experience and provide optional feedback
+
+## 🔮 Future Enhancements
+
+- [ ] User authentication for session tracking
+- [ ] AI-powered personalized summaries
+- [ ] Visual insights and pattern analysis
+- [ ] Partner sharing capabilities
+- [ ] Progress tracking across sessions
+- [ ] Export functionality
+- [ ] Mobile-optimized interface
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - feel free to use, modify, and distribute.
+
+## 🆘 Support
+
+If you encounter any issues:
+1. Check the Firebase configuration
+2. Ensure all dependencies are installed
+3. Verify your Python version (3.8+)
+4. Review the Streamlit logs for error details
 
 ---
 
-## Firestore Structure (Suggested)
-
-* **users**
-
-  * Document: user\_id
-
-    * `name`
-    * `age`
-    * `gender`
-    * `relationship_status`
-
-* **responses**
-
-  * Document: response\_id
-
-    * `user_id`
-    * `topic`
-    * `question_1` … `question_5`
-    * `summary`
-
-* **ratings**
-
-  * Document: rating\_id
-
-    * `user_id`
-    * `topic`
-    * `rating` (1–5)
-    * `feedback` (optional)
-
----
-
-## Future Enhancements
-
-* Add **user authentication** to track repeated sessions.
-* Include **AI-generated summaries** tailored to responses.
-* Implement **visual insights**, such as charts for recurring patterns.
-* Enable **sharing of summaries** privately with partners.
-
----
-
-## License
-
-MIT License – feel free to use, modify, and distribute.
-
----
-
-If you want, I can also **draft a basic `app.py` skeleton** that implements this flow in Streamlit with Firestore integration, ready to plug in the 5-question content for each topic. Do you want me to do that next?
+**Built with ❤️ for better relationships**
