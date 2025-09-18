@@ -203,13 +203,6 @@ streamlit run app.py
 
 MIT License - feel free to use, modify, and distribute.
 
-## 🆘 Support
-
-If you encounter any issues:
-1. Check the Firebase configuration
-2. Ensure all dependencies are installed
-3. Verify your Python version (3.8+)
-4. Review the Streamlit logs for error details
 
 ---
 
